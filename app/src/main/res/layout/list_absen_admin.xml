@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:id="@+id/LinearCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Nomor Induk Siswa "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNISSiswa"
+                tools:text="123456"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Nama Siswa "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNamaSiswa"
+                tools:text="Muhammad Supriyadi"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Nomor Induk Pegawai "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNIPPengajar"
+                tools:text="123456"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Guru Pengajar "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvNamaPengajar"
+                tools:text="Zyarga Aurelius Spd"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Alpa "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvAlpa"
+                tools:text="1"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Izin "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvIzin"
+                tools:text="1"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Sakit "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvSakit"
+                tools:text="1"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Verifikasi "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="@color/PureBlack"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvVerif"
+                tools:text="Sudah"
+                android:textColor="@color/PureBlack"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -45,8 +45,8 @@ public class AdapterGuruAutoNama extends ArrayAdapter<DataModel> {
         DataModel dm = getItem(position);
 
         if (dm != null) {
-            textViewNip.setText(dm.getNip());
             textViewName.setText(dm.getNama());
+            textViewNip.setText(dm.getNip());
         }
 
         return convertView;

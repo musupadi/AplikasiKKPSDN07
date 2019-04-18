@@ -44,6 +44,8 @@ public class MainSiswaAdmin extends Fragment {
             public void onClick(View v) {
                 Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
                 goInput.putExtra("INPUT_SISWA","input_siswa");
+                goInput.putExtra("KEY_UI","Insert");
+                goInput.putExtra("KEY_NIS","12345");
                 getActivity().startActivities(new Intent[]{goInput});
             }
         });

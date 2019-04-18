@@ -2,6 +2,7 @@ package com.destinyapp.aplikasisdn07.Guru.Fragment;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.destinyapp.aplikasisdn07.Guru.MainGuruActivity;
 import com.destinyapp.aplikasisdn07.Models.DataModel;
 import com.destinyapp.aplikasisdn07.Models.ResponseModel;
 import com.destinyapp.aplikasisdn07.R;
+import com.destinyapp.aplikasisdn07.Session.DB_Helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +41,13 @@ import retrofit2.Response;
  */
 public class NilaiFragmentGuru extends Fragment {
 
+
+    DB_Helper dbHelper;
+    String User="";
+    Button Insert;
     Spinner Kelas;
     AutoCompleteTextView NIS,NamaMapel;
-    EditText NamaSiswa,idMapel,isiNilai,sakit,izin,alpa;
+    EditText NamaSiswa,idMapel,isiNilai;
     private List<DataModel> aList = new ArrayList<>();
     private AdapterKelasSpinner aSpinner;
 
@@ -60,16 +66,21 @@ public class NilaiFragmentGuru extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Insert = (Button)view.findViewById(R.id.btnBeriNilai);
         Kelas = (Spinner)view.findViewById(R.id.SpinnerKelasPenilaianGuru);
         NIS = (AutoCompleteTextView)view.findViewById(R.id.ACTNISPenilaianGuru);
         NamaSiswa = (EditText) view.findViewById(R.id.tvNamaSiswaPenilaianGuru);
         NamaMapel = (AutoCompleteTextView) view.findViewById(R.id.ACTNamaPelajaranPenilaianGuru);
         idMapel = (EditText)view.findViewById(R.id.tvIdPelajaranPenilaianGuru);
         isiNilai = (EditText)view.findViewById(R.id.etIsiNilaiGuru);
-        sakit = (EditText)view.findViewById(R.id.etBanyakSakitGuru);
-        izin = (EditText)view.findViewById(R.id.etBanyakIzinGuru);
-        alpa = (EditText)view.findViewById(R.id.etBanyakAlpaGuru);
         getKelas();
+        dbHelper = new DB_Helper(getActivity());
+        Cursor cursor = dbHelper.checkSession();
+
+        while (cursor.moveToNext()){
+            User=cursor.getString(0);
+        }
+
         aSpinner = new AdapterKelasSpinner(getActivity(),aList);
         Kelas.setAdapter(aSpinner);
 
@@ -103,6 +114,35 @@ public class NilaiFragmentGuru extends Fragment {
                     String mapel = NamaMapel.getEditableText().toString();
                     getIDMapel(mapel);
                 }
+            }
+        });
+        Insert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InsertNilai();
+            }
+        });
+    }
+    private void InsertNilai(){
+        final String nilai = isiNilai.getText().toString();
+        final String nis = NIS.getEditableText().toString();
+        final String id_mapel = idMapel.getText().toString();
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> insertNilai = api.insertNilaiSiswa(nis,User,nilai,id_mapel,"belum");
+        insertNilai.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String Response = response.body().getResponse();
+                if(Response.equals("Insert")){
+                    Toast.makeText(getActivity(),"Data Berhasil Terinput",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(),"Data Gagal Terinput",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(getActivity(),"Data Error pada Insert Data"+nis+nilai+id_mapel,Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -232,8 +272,5 @@ public class NilaiFragmentGuru extends Fragment {
         NamaMapel.setText("");
         idMapel.setText("");
         isiNilai.setText("");
-        sakit.setText("");
-        izin.setText("");
-        alpa.setText("");
     }
 }

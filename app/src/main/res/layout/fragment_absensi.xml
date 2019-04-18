@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Guru.Fragment.RaportSiswaGuru"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Kelas"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:textColor="@android:color/black"/>
+    <Spinner
+        android:id="@+id/SpinnerKelasPenilaianGuru"
+        android:autofillHints="Masukan Nama Kelas"
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+
+    <AutoCompleteTextView
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:hint="Masukan Nomor Induk Siswa"
+        android:id="@+id/ACTNISPenilaianGuru"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/tvNamaSiswaPenilaianGuru"
+        android:hint="Nama Siswa"
+        tools:text="Muhammad Supriyadi"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        />
+    <EditText
+        android:id="@+id/etSakit"
+        android:hint="Masukan Jumlah Sakit"
+        tools:text="90"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        />
+    <EditText
+        android:id="@+id/etIzin"
+        android:hint="Masukan Jumlah Izin"
+        tools:text="90"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        />
+    <EditText
+        android:id="@+id/etAlpa"
+        android:hint="Masukan Jumlah Alpa"
+        tools:text="90"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        />
+
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnBeriAbsen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beri Nilai"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

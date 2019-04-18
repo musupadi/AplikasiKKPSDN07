@@ -1,6 +1,7 @@
 package com.destinyapp.aplikasisdn07.Admin.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.destinyapp.aplikasisdn07.API.ApiRequest;
 import com.destinyapp.aplikasisdn07.API.RetroServer;
+import com.destinyapp.aplikasisdn07.Admin.MainAdminActivity;
 import com.destinyapp.aplikasisdn07.Models.ResponseModel;
 import com.destinyapp.aplikasisdn07.R;
 
@@ -30,13 +32,13 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DataMataPelajaranAdmin extends Fragment {
+public class InputDataMataPelajaranAdmin extends Fragment {
 
     EditText NamaMapel;
     Spinner tingkatkelas;
     Button insert;
     String tingkatKelas;
-    public DataMataPelajaranAdmin() {
+    public InputDataMataPelajaranAdmin() {
         // Required empty public constructor
     }
 
@@ -45,7 +47,7 @@ public class DataMataPelajaranAdmin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_mata_pelajaran_admin, container, false);
+        return inflater.inflate(R.layout.fragment_input_data_mata_pelajaran_admin, container, false);
     }
 
     @Override
@@ -83,20 +85,22 @@ public class DataMataPelajaranAdmin extends Fragment {
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                insertData();
             }
         });
     }
     private void insertData(){
         ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
-        Call<ResponseModel> getInsertKelas = api.insertDataKelas(NamaMapel.getText().toString(),
-                tingkatKelas);
+        Call<ResponseModel> getInsertKelas = api.insertDataMapel(NamaMapel.getText().toString(),tingkatKelas);
         getInsertKelas.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String Response = response.body().getResponse();
                 if(Response.equals("Insert")){
                     Toast.makeText(getActivity(),"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show();
+                    Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
+                    goInput.putExtra("OUTPUT_MATA_PELAJARAN","output_mata_pelajaran");
+                    getActivity().startActivities(new Intent[]{goInput});
                 }else if(Response.equals("Update")){
                     Toast.makeText(getActivity(),"Data Data Kelas sudah teriisi",Toast.LENGTH_SHORT).show();
                 }

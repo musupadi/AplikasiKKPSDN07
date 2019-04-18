@@ -103,13 +103,90 @@ public class InputDataGuruAdmin extends Fragment {
 
             }
         });
+
+        //Update Insert
+        String UI = this.getArguments().getString("KEY_UI").toString();
+        String KEY_NIP = this.getArguments().getString("KEY_NIP").toString();
+        if (UI.equals("Update")){
+            Update(KEY_NIP);
+        }else if(UI.equals("Insert")){
+            insert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    insertGuru();
+                }
+            });
+        }
+    }
+    private void Update(String NIP){
+        getDataGuru(NIP);
+        insert.setText("Update");
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertGuru();
+                UpdateData();
             }
         });
     }
+    private void UpdateData(){
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> insertDataGuru = api.updateDataGuru(nip.getText().toString(),
+                password.getText().toString(),
+                nama.getText().toString(),
+                TempatLahir.getText().toString(),
+                getTanggal(),
+                agama.getText().toString(),
+                notelp.getText().toString(),
+                jabatan.getText().toString(),
+                pendidikan.getText().toString(),
+                jenisKelamin,
+                defaultPPGuru,
+                alamat.getText().toString());
+        insertDataGuru.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                Toast.makeText(getActivity(),"Data Berhasil Diupdate",Toast.LENGTH_SHORT).show();
+                Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
+                goInput.putExtra("OUTPUT_GURU","input");
+                getActivity().startActivities(new Intent[]{goInput});
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(getActivity(),"Data Error dalam Method InsertData",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getDataGuru(String NIP){
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> GetData = api.getNamaFromNip(NIP);
+        GetData.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                nip.setText(response.body().getNip());
+                nama.setText(response.body().getNama());
+                password.setText(response.body().getPassword());
+                TempatLahir.setText(response.body().getTempatlahir());
+                agama.setText(response.body().getAgama());
+                notelp.setText(response.body().getNotelp());
+                jabatan.setText(response.body().getJabatan());
+                pendidikan.setText(response.body().getPendidikan());
+                if (response.body().getJk().equals("Pria")){
+                    jk.setSelection(1);
+                }else if(response.body().getJk().equals("Wanita")){
+                    jk.setSelection(2);
+                }
+                alamat.setText(response.body().getAlamat());
+                Toast.makeText(getActivity(),response.body().getNip(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(getActivity(),"Data Error",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private String getTanggal(){
         String tanggal = tahun.getText().toString()+"-"+bulan.getText().toString()+"-"+tgl.getText().toString();
         return tanggal;

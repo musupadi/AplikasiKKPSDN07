@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.destinyapp.aplikasisdn07.Admin.MainAdminActivity;
 import com.destinyapp.aplikasisdn07.Guru.MainGuruActivity;
 import com.destinyapp.aplikasisdn07.Models.DataModel;
 import com.destinyapp.aplikasisdn07.R;
@@ -63,11 +64,11 @@ public class AdapterGetAllSiswa extends RecyclerView.Adapter<AdapterGetAllSiswa.
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent goInput = new Intent(ctx, MainGuruActivity.class);
-                    goInput.putExtra("nama_siswa",dm.getNama_siswa());
-                    goInput.putExtra("nis",dm.getNis());
-                    goInput.putExtra("Penilaian","penilaian");
-                    goInput.putExtra("id_kelas",dm.getId_kelas());
+                    String NIS = dm.getNis();
+                    Intent goInput = new Intent(ctx, MainAdminActivity.class);
+                    goInput.putExtra("INPUT_SISWA","input_guru");
+                    goInput.putExtra("KEY_UI","Update");
+                    goInput.putExtra("KEY_NIS",NIS);
                     ctx.startActivities(new Intent[]{goInput});
                 }
             });

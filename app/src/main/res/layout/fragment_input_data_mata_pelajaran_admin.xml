@@ -9,7 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Admin.Fragment.DataMataPelajaranAdmin"
+        tools:context=".Admin.Fragment.InputDataMataPelajaranAdmin"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <EditText
@@ -47,25 +47,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </ScrollView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Data Kelas"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="20dp"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerDataSiswaAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
 
 
 

@@ -28,17 +28,24 @@
                 android:gravity="center"
                 android:textColor="@color/PureBlack"/>
             <AutoCompleteTextView
+                android:id="@+id/ACTNIS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nomor Induk Siswa"
                 android:gravity="center"
                 android:textColor="@color/PureBlack"/>
             <AutoCompleteTextView
+                android:id="@+id/ACTNamaSiswa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama Siswa"
                 android:gravity="center"/>
+            <Spinner
+                android:id="@+id/SpinnerKelas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Spinner>
             <Button
+                android:id="@+id/btnCari"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

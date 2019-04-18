@@ -1,6 +1,7 @@
 package com.destinyapp.aplikasisdn07.Admin.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +20,7 @@ import com.destinyapp.aplikasisdn07.API.ApiRequest;
 import com.destinyapp.aplikasisdn07.API.RetroServer;
 import com.destinyapp.aplikasisdn07.Admin.Adapter.AdapterGuruAutoNama;
 import com.destinyapp.aplikasisdn07.Admin.Adapter.AdapterGuruAutoNip;
+import com.destinyapp.aplikasisdn07.Admin.MainAdminActivity;
 import com.destinyapp.aplikasisdn07.Guru.Adapter.AdapterKelasSpinner;
 import com.destinyapp.aplikasisdn07.Guru.Adapter.AdapterNamaMapel;
 import com.destinyapp.aplikasisdn07.Models.DataModel;
@@ -36,16 +37,15 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DataJadwalAdmin extends Fragment {
+public class InputDataJadwalAdmin extends Fragment {
 
     Spinner Kelas,Hari,dari_jam,sampai_jam;
     AutoCompleteTextView NamaGuru,NIP,NamaMapel;
     Button insert;
-    String id_kelas,idMapel,hari,dariJam,sampaiJam,tingkatKelas;
+    String id_kelas,hari,idMapel,dariJam,sampaiJam,tingkatKelas;
     private List<DataModel> mItems = new ArrayList<>();
-    private AdapterKelasSpinner aSpinner;
 
-    public DataJadwalAdmin() {
+    public InputDataJadwalAdmin() {
         // Required empty public constructor
     }
 
@@ -54,7 +54,7 @@ public class DataJadwalAdmin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_jadwal_admin, container, false);
+        return inflater.inflate(R.layout.fragment_input_data_jadwal_admin, container, false);
     }
 
     @Override
@@ -98,7 +98,6 @@ public class DataJadwalAdmin extends Fragment {
             @Override
             public void onClick(View v) {
                 getIDMapel();
-                insertData();
             }
         });
     }
@@ -217,7 +216,7 @@ public class DataJadwalAdmin extends Fragment {
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 mItems=response.body().getResult();
                 AdapterGuruAutoNip adapter = new AdapterGuruAutoNip(getActivity(),mItems);
-                NamaGuru.setAdapter(adapter);
+                NIP.setAdapter(adapter);
             }
 
             @Override
@@ -321,22 +320,26 @@ public class DataJadwalAdmin extends Fragment {
             }
         });
     }
-    private void insertData(){
-        getIDMapel();
+    private void insertData(String idMapel){
         ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
         Call<ResponseModel> Insert = api.insertDataJadwal(NIP.getEditableText().toString(),
                 id_kelas,
                 idMapel,
-                hari,
-                dariJam,
-                sampaiJam);
+                Hari.getSelectedItem().toString(),
+                dari_jam.getSelectedItem().toString(),
+                sampai_jam.getSelectedItem().toString());
         Insert.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String Response = response.body().getResponse();
                 if(Response.equals("Insert")){
                     Toast.makeText(getActivity(),"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show();
-                }else{
+                    Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
+                    goInput.putExtra("OUTPUT_JADWAL","output_jadwal");
+                    getActivity().startActivities(new Intent[]{goInput});
+                }else if(Response.equals("Update")){
+                    Toast.makeText(getActivity(),"Data Jadwal Kelas Sudah Terisi !!",Toast.LENGTH_SHORT).show();
+                } else{
                     Toast.makeText(getActivity(),"Terjadi Error",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -355,6 +358,7 @@ public class DataJadwalAdmin extends Fragment {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 idMapel = response.body().getId_mapel();
+                insertData(idMapel);
             }
 
             @Override

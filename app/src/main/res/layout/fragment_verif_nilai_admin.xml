@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.Fragment.VerifNilaiAdmin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTittleMencari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data Nilai Yang Belum Terverifikasi"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/PureBlack"/>
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ACTnis"
+            android:hint="Nomor Induk Siswa"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etNama"
+            android:hint="Nama Siswa"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Mencari"
+            style="@style/Base.Widget.AppCompat.Button.Colored"/>
+        <TextView
+            android:id="@+id/tvTittleRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerBelumNilai">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</FrameLayout>

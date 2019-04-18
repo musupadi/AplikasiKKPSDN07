@@ -1,6 +1,7 @@
 package com.destinyapp.aplikasisdn07.Admin.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.destinyapp.aplikasisdn07.API.ApiRequest;
 import com.destinyapp.aplikasisdn07.API.RetroServer;
+import com.destinyapp.aplikasisdn07.Admin.MainAdminActivity;
 import com.destinyapp.aplikasisdn07.Models.ResponseModel;
 import com.destinyapp.aplikasisdn07.R;
 
@@ -100,6 +102,9 @@ public class InputDataKelasAdmin extends Fragment {
                 String Response = response.body().getResponse();
                 if(Response.equals("Insert")){
                     Toast.makeText(getActivity(),"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show();
+                    Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
+                    goInput.putExtra("OUTPUT_KELAS","output_kelas");
+                    getActivity().startActivities(new Intent[]{goInput});
                 }else if(Response.equals("Update")){
                     Toast.makeText(getActivity(),"Data Data Kelas sudah teriisi",Toast.LENGTH_SHORT).show();
                 }

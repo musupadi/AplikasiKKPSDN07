@@ -73,6 +73,28 @@ public interface ApiRequest {
     @GET("getAllDataGuru.php")
     Call<ResponseModel> getAllDataGuru();
 
+    @GET("getAllSiswa.php")
+    Call<ResponseModel> getAllSiswa();
+
+    @GET("getAllMapel.php")
+    Call<ResponseModel> getAllMapel();
+
+    @GET("getAllJadwal.php")
+    Call<ResponseModel> getAllJadwal();
+
+    @FormUrlEncoded
+    @POST("getAllJadwalSpec.php")
+    Call<ResponseModel> getAllJadwalSpec(@Field("id_kelas") String id_kelas,
+                                         @Field("hari") String hari);
+
+    @FormUrlEncoded
+    @POST("getVerifAbsen.php")
+    Call<ResponseModel> getVerifAbsen(@Field("verif") String verif);
+
+    @FormUrlEncoded
+    @POST("getVerifNilai.php")
+    Call<ResponseModel> getVerifNilai(@Field("verif") String verif);
+
     @FormUrlEncoded
     @POST("getAllSiswaFromClassGuru.php")
     Call<ResponseModel> getAllSiswaFromGuru(@Field("id_kelas") String id_kelas);
@@ -90,6 +112,10 @@ public interface ApiRequest {
     Call<ResponseModel> getIDMapel(@Field("nama_mapel") String nama_mapel);
 
     @FormUrlEncoded
+    @POST("getAllMapelFromNama.php")
+    Call<ResponseModel> getAllMapelFromNama(@Field("nama_mapel") String nama_mapel);
+
+    @FormUrlEncoded
     @POST("CheckNilaiSiswa.php")
     Call<ResponseModel> checkNilaiSiswa(@Field("nis") String nis,
                                         @Field("id_mapel") String id_mapel);
@@ -99,7 +125,8 @@ public interface ApiRequest {
     Call<ResponseModel> insertNilaiSiswa(@Field("nis") String nis,
                                         @Field("nip") String nip,
                                          @Field("nilai") String nilai,
-                                         @Field("id_mapel") String id_mapel);
+                                         @Field("id_mapel") String id_mapel,
+                                         @Field("verif") String verif);
 
     @FormUrlEncoded
     @POST("UpdateNilaiSiswa.php")
@@ -121,8 +148,17 @@ public interface ApiRequest {
     Call<ResponseModel> getDataSiswa(@Field("nis") String nis);
 
     @FormUrlEncoded
+    @POST("getAbsenSiswa.php")
+    Call<ResponseModel> getAbsenSiswa(@Field("nis") String nis);
+
+    @FormUrlEncoded
     @POST("getSiswa.php")
     Call<ResponseModel> getSiswaData(@Field("nis") String nis);
+
+    @FormUrlEncoded
+    @POST("getSiswaData.php")
+    Call<ResponseModel> getDataSiswa(@Field("nis") String nis,
+                                     @Field("nama_siswa") String nama_siswa);
 
     @FormUrlEncoded
     @POST("getNilaiSiswa.php")
@@ -146,6 +182,14 @@ public interface ApiRequest {
     Call<ResponseModel> getDataAdmin(@Field("username") String username);
 
     @FormUrlEncoded
+    @POST("getNipFromNama.php")
+    Call<ResponseModel> getNipFromNama(@Field("nama") String nama);
+
+    @FormUrlEncoded
+    @POST("getNamaFromNip.php")
+    Call<ResponseModel> getNamaFromNip(@Field("nip") String nip);
+
+    @FormUrlEncoded
     @POST("InsertDataGuru.php")
     Call<ResponseModel> insrertDataGuru(@Field("nip") String nip,
                                         @Field("password") String password,
@@ -161,8 +205,44 @@ public interface ApiRequest {
                                         @Field("alamat") String alamat);
 
     @FormUrlEncoded
+    @POST("UpdateDataGuru.php")
+    Call<ResponseModel> updateDataGuru(@Field("nip") String nip,
+                                        @Field("password") String password,
+                                        @Field("nama") String nama,
+                                        @Field("tempatlahir") String tempatlahir,
+                                        @Field("tanggalahir") String tanggalahir,
+                                        @Field("agama") String agama,
+                                        @Field("notelp") String notelp,
+                                        @Field("jabatan") String jabatan,
+                                        @Field("pendidikan") String pendidikan,
+                                        @Field("jk") String jk,
+                                        @Field("pictureguru") String pictureguru,
+                                        @Field("alamat") String alamat);
+
+    @FormUrlEncoded
+    @POST("InsertAbsenSiswa.php")
+    Call<ResponseModel> insertAbsenSiswa(@Field("nis") String nis,
+                                        @Field("nip") String nip,
+                                        @Field("sakit") String sakit,
+                                        @Field("izin") String izin,
+                                        @Field("alpa") String alpa);
+
+    @FormUrlEncoded
     @POST("InsertDataSiswa.php")
     Call<ResponseModel> insertDataSiswa(@Field("nis") String nis,
+                                        @Field("nama_siswa") String nama_siswa,
+                                        @Field("jk_siswa") String jk_siswa,
+                                        @Field("tahunajaran") String tahunajaran,
+                                        @Field("namaibu") String namaibu,
+                                        @Field("namaayah") String namaayah,
+                                        @Field("pekerjaanayah") String pekerjaanayah,
+                                        @Field("pekerjaanibu") String pekerjaanibu,
+                                        @Field("id_kelas") String id_kelas,
+                                        @Field("profile_siswa") String profile_siswa);
+
+    @FormUrlEncoded
+    @POST("UpdateDataSiswa.php")
+    Call<ResponseModel> updateDataSiswa(@Field("nis") String nis,
                                         @Field("nama_siswa") String nama_siswa,
                                         @Field("jk_siswa") String jk_siswa,
                                         @Field("tahunajaran") String tahunajaran,
@@ -188,7 +268,7 @@ public interface ApiRequest {
                                         @Field("tingkat_kelas") String tingkat_kelas);
 
     @FormUrlEncoded
-    @POST("InsertDataMapel.php")
+    @POST("InsertDataMataPelajaran.php")
     Call<ResponseModel> insertDataMapel(@Field("nama_mapel") String nama_mapel,
                                         @Field("tingkat_kelas") String tingkat_kelas);
 
@@ -196,4 +276,31 @@ public interface ApiRequest {
     @POST("getGuruFromNama.php")
     Call<ResponseModel> getGuru(@Field("nama") String nama,
                                         @Field("nip") String nip);
+
+    @FormUrlEncoded
+    @POST("getSiswaAutoText.php")
+    Call<ResponseModel> getSiswaAutoText(@Field("nis") String nis,
+                                @Field("nama_siswa") String nama_siswa);
+
+    @FormUrlEncoded
+    @POST("getDataGuru.php")
+    Call<ResponseModel> getDataGuru(@Field("nama") String nama,
+                                @Field("nip") String nip);
+
+    @FormUrlEncoded
+    @POST("UpdateVerifAbsen.php")
+    Call<ResponseModel> UpdateVerifAbsen(@Field("nis") String nis,
+                                @Field("verif") String verif);
+    @FormUrlEncoded
+    @POST("UpdateVerifNilai.php")
+    Call<ResponseModel> UpdateVerifNilai(@Field("nis") String nis,
+                                         @Field("verif") String verif,
+                                         @Field("id_mapel") String id_mapel);
+
+    @FormUrlEncoded
+    @POST("UpdateDataAbsen.php")
+    Call<ResponseModel> UpdateDataAbsen(@Field("nis") String nis,
+                                    @Field("sakit") String sakit,
+                                        @Field("izin") String izin,
+                                        @Field("alpa") String alpa);
 }

@@ -25,15 +25,28 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.destinyapp.aplikasisdn07.API.ApiRequest;
 import com.destinyapp.aplikasisdn07.API.RetroServer;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.DataJadwal;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.MainJadwalAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.MainKelasAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.MainMataPelajaranAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.MainNilaiAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.MainSiswaAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.UpdateAbsenAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.UpdateNilaiAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.VerifAbsenAdmin;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.DataGuruAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.DataKelasAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.DataMataPelajaran;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.DataSiswaAdmin;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.InputDataGuruAdmin;
-import com.destinyapp.aplikasisdn07.Admin.Fragment.DataJadwalAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.InputDataJadwalAdmin;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.InputDataKelasAdmin;
-import com.destinyapp.aplikasisdn07.Admin.Fragment.DataMataPelajaranAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.InputDataMataPelajaranAdmin;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.InputDataSiswaAdmin;
 import com.destinyapp.aplikasisdn07.Admin.Fragment.MainGuruAdmin;
+import com.destinyapp.aplikasisdn07.Admin.Fragment.VerifNilaiAdmin;
 import com.destinyapp.aplikasisdn07.Fragment.AboutFragment;
+import com.destinyapp.aplikasisdn07.Guru.Fragment.AbsensiSiswaGuru;
 import com.destinyapp.aplikasisdn07.MainActivity;
 import com.destinyapp.aplikasisdn07.Models.ResponseModel;
 import com.destinyapp.aplikasisdn07.R;
@@ -103,20 +116,69 @@ public class MainAdminActivity extends AppCompatActivity
         String outputGuru = data.getStringExtra("OUTPUT_GURU");
         String inputSiswa = data.getStringExtra("INPUT_SISWA");
         String outputSiswa = data.getStringExtra("OUTPUT_SISWA");
+        String inputJadwal = data.getStringExtra("INPUT_JADWAL");
+        String outputJadwal = data.getStringExtra("OUTPUT_JADWAL");
         String inputKelas = data.getStringExtra("INPUT_KELAS");
         String outputKelas = data.getStringExtra("OUTPUT_KELAS");
+        String inputMapel = data.getStringExtra("INPUT_MATA_PELAJARAN");
+        String outputMapel = data.getStringExtra("OUTPUT_MATA_PELAJARAN");
+        final String UI = data.getStringExtra("KEY_UI");
+        final String NIP = data.getStringExtra("KEY_NIP");
+        final String NIS = data.getStringExtra("KEY_NIS");
+        final String AbsenVerif = data.getStringExtra("AbsenVerif");
+        final String UpdateAbsen = data.getStringExtra("UPDATE_ABSEN");
+        final String NilaiVerif = data.getStringExtra("NilaiVerif");
+        final String UpdateNilai = data.getStringExtra("UPDATE_NILAI");
+        final String UpdateIDMapel = data.getStringExtra("UPDATE_IDMAPEL");
         if (inputGuru != null){
-            fragment=new InputDataGuruAdmin();
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_UI",UI);
+            bundle.putString("KEY_NIP",NIP);
+            fragment = new InputDataGuruAdmin();
+            fragment.setArguments(bundle);
         }else if(outputGuru != null){
             fragment=new DataGuruAdmin();
         }else if(inputSiswa != null){
-            fragment=new InputDataSiswaAdmin();
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_UI",UI);
+            bundle.putString("KEY_NIS",NIS);
+            fragment = new InputDataSiswaAdmin();
+            fragment.setArguments(bundle);
         }else if(outputSiswa != null){
             fragment=new DataSiswaAdmin();
+        }else if(inputJadwal !=null){
+            fragment=new InputDataJadwalAdmin();
+        }else if(outputJadwal !=null){
+            fragment=new DataJadwal();
         }else if(inputKelas !=null){
             fragment=new InputDataKelasAdmin();
         }else if(outputKelas !=null){
-
+            fragment=new DataKelasAdmin();
+        }else if(inputMapel !=null){
+            fragment=new InputDataMataPelajaranAdmin();
+        }else if(outputMapel !=null){
+            fragment=new DataMataPelajaran();
+        }else if(AbsenVerif !=null){
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_VERIF_ABSEN",AbsenVerif);
+            fragment=new VerifAbsenAdmin();
+            fragment.setArguments(bundle);
+        }else if(UpdateAbsen !=null){
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_NIS",UpdateAbsen);
+            fragment=new UpdateAbsenAdmin();
+            fragment.setArguments(bundle);
+        }else if(NilaiVerif !=null){
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_VERIF_NILAI",NilaiVerif);
+            fragment=new VerifNilaiAdmin();
+            fragment.setArguments(bundle);
+        }else if(UpdateNilai !=null){
+            Bundle bundle = new Bundle();
+            bundle.putString("KEY_NIS",UpdateNilai);
+            bundle.putString("KEY_MAPEL",UpdateIDMapel);
+            fragment=new UpdateNilaiAdmin();
+            fragment.setArguments(bundle);
         }
 
         //DONE
@@ -167,15 +229,15 @@ public class MainAdminActivity extends AppCompatActivity
         if (id == R.id.nav_guru_admin) {
             fragment=new MainGuruAdmin();
         } else if (id == R.id.nav_siswa_admin) {
-            fragment=new InputDataSiswaAdmin();
+            fragment=new MainSiswaAdmin();
         } else if (id == R.id.nav_mataPelajaran_admin) {
-            fragment=new DataMataPelajaranAdmin();
+            fragment=new MainMataPelajaranAdmin();
         } else if (id == R.id.nav_kelas_admin) {
-            fragment=new InputDataKelasAdmin();
+            fragment=new MainKelasAdmin();
         } else if (id == R.id.nav_jadwal_admin) {
-            fragment=new DataJadwalAdmin();
+            fragment=new MainJadwalAdmin();
         } else if (id == R.id.nav_penilaianAdmin) {
-
+            fragment=new MainNilaiAdmin();
         } else if (id == R.id.nav_data_diri_admin) {
 
         }else if (id == R.id.nav_logout_admin) {

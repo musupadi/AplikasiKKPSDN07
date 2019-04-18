@@ -40,7 +40,7 @@ public class InputDataSiswaAdmin extends Fragment {
     EditText nis,nama,tahunajaran,namaibu,namaayah,pekerjanaayah,pekerjaanibu;
     Button insert;
     String idKelas,jenisKelamin;
-    String defaultPPSiswa = "zeref.jpg";
+    String defaultPPSiswa = "logo.png";
     private List<DataModel> mItems = new ArrayList<>();
     private AdapterKelasSpinner aSpinner;
     public InputDataSiswaAdmin() {
@@ -78,6 +78,19 @@ public class InputDataSiswaAdmin extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         jk.setAdapter(dataAdapter);
 
+        //Update Insert
+        String UI = this.getArguments().getString("KEY_UI").toString();
+        String KEY_NIS = this.getArguments().getString("KEY_NIS").toString();
+        if (UI.equals("Update")){
+            Update(KEY_NIS);
+        }else if(UI.equals("Insert")){
+            insert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Insert();
+                }
+            });
+        }
         jk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -110,10 +123,74 @@ public class InputDataSiswaAdmin extends Fragment {
 
             }
         });
+    }
+    private void Update(String NIS){
+        getDataSiswa(NIS);
+        insert.setText("Update");
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Insert();
+                UpdateData();
+            }
+        });
+    }
+    private void UpdateData(){
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> insertDataSiswa = api.updateDataSiswa(nis.getText().toString(),
+                nama.getText().toString(),
+                jenisKelamin,
+                tahunajaran.getText().toString(),
+                namaibu.getText().toString(),
+                namaayah.getText().toString(),
+                pekerjanaayah.getText().toString(),
+                pekerjaanibu.getText().toString(),
+                idKelas,
+                defaultPPSiswa);
+        insertDataSiswa.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String Response = response.body().getResponse();
+                if(Response.equals("Update")){
+                    Toast.makeText(getActivity(),"Data Berhasil Diupdate",Toast.LENGTH_SHORT).show();
+                    Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
+                    goInput.putExtra("OUTPUT_SISWA","output_data_siswa");
+                    getActivity().startActivities(new Intent[]{goInput});
+                }else if(Response.equals("Insert")){
+                    Toast.makeText(getActivity(),"Data NIS sudah teriisi",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                Toast.makeText(getActivity(),"Data Error dalam Method InsertData",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getDataSiswa(final String NIS){
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> GetData = api.getDataSiswa(NIS);
+        GetData.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                nis.setText(NIS);
+                nama.setText(response.body().getNama_siswa());
+                if(response.body().getJk_siswa().equals("Pria")){
+                    jk.setSelection(1);
+                }else if(response.body().getJk_siswa().equals("Wanita")){
+                    jk.setSelection(2);
+                }
+                tahunajaran.setText(response.body().getTahunajaran());
+                namaayah.setText(response.body().getNamaayah());
+                namaibu.setText(response.body().getNamaibu());
+                pekerjanaayah.setText(response.body().getPekerjaanayah());
+                pekerjaanibu.setText(response.body().getPekerjaanibu());
+                kelas.setSelection(Integer.parseInt(response.body().getId_kelas())-1);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+
             }
         });
     }
@@ -153,7 +230,7 @@ public class InputDataSiswaAdmin extends Fragment {
                 if(Response.equals("Insert")){
                     Toast.makeText(getActivity(),"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show();
                     Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
-                    goInput.putExtra("OUTPUT_DATA_GURU","input");
+                    goInput.putExtra("OUTPUT_SISWA","output_data_siswa");
                     getActivity().startActivities(new Intent[]{goInput});
                 }else if(Response.equals("Update")){
                     Toast.makeText(getActivity(),"Data NIS sudah teriisi",Toast.LENGTH_SHORT).show();

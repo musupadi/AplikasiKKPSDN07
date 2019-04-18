@@ -66,39 +66,13 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         />
-    <EditText
-        android:id="@+id/etBanyakSakitGuru"
-        android:hint="Jumlah Sakit Siswa"
-        tools:text="1"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:id="@+id/etBanyakIzinGuru"
-        android:hint="Jumlah Izin Siswa"
-        tools:text="0"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:id="@+id/etBanyakAlpaGuru"
-        android:hint="Jumlah Alpa"
-        tools:text="1"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        />
+
 
     <Button
         android:layout_marginTop="30dp"
-        android:id="@+id/btnCheckRaport"
+        android:id="@+id/btnBeriNilai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check Raport"
+        android:text="Beri Nilai"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

@@ -44,32 +44,10 @@
                     android:id="@+id/btnInputDataKelasAdmin"
                     android:text="Input Data Kelas"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    style="@style/Base.Widget.AppCompat.Button.Colored"/>
             </LinearLayout>
         </ScrollView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Data Kelas"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="20dp"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerDataSiswaAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-
-
-
-
     </LinearLayout>
 
 </FrameLayout>

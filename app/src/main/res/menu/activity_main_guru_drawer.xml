@@ -9,10 +9,6 @@
             android:icon="@drawable/ic_add_alert_black_24dp"
             android:title="Jadwal Mengajar" />
         <item
-            android:id="@+id/nav_absenGuru"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="Absen Siswa" />
-        <item
             android:id="@+id/nav_penilaianGuru"
             android:icon="@drawable/ic_dehaze_black_24dp"
             android:title="Penilaian Siswa" />
@@ -38,5 +34,10 @@
                 android:title="Keluar" />
         </menu>
     </item>
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_menu_send"
+        android:title="About" />
 
 </menu>

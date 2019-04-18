@@ -41,8 +41,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Input Data Guru"
-                    android:textSize="30dp"
+                    android:text="Input Data Siswa"
+                    android:textSize="20dp"
                     android:layout_gravity="start"
                     android:gravity="top|center"
                     android:textColor="@android:color/black"/>
@@ -62,8 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Check Data Guru"
-                    android:textSize="30dp"
+                    android:text="Check Data Siswa"
+                    android:textSize="20dp"
                     android:layout_gravity="start"
                     android:gravity="top|center"
                     android:textColor="@android:color/black"/>

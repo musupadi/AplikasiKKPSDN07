@@ -39,17 +39,20 @@
                         android:gravity="center"
                         android:textColor="@color/PureBlack"/>
                     <AutoCompleteTextView
+                        android:id="@+id/ACTNama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Nama Guru"
                         android:gravity="center"
                         android:textColor="@color/PureBlack"/>
                     <AutoCompleteTextView
+                        android:id="@+id/ACTNIP"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="NIP Guru"
                         android:gravity="center"/>
                     <Button
+                        android:id="@+id/btnMencari"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

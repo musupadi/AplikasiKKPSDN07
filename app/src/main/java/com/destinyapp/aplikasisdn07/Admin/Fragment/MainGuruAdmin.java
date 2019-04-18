@@ -57,6 +57,8 @@ public class MainGuruAdmin extends Fragment {
     private void Input(){
         Intent goInput = new Intent(getActivity(), MainAdminActivity.class);
         goInput.putExtra("INPUT_GURU","input_guru");
+        goInput.putExtra("KEY_UI","Insert");
+        goInput.putExtra("KEY_NIP","12345");
         getActivity().startActivities(new Intent[]{goInput});
     }
     private void Output(){

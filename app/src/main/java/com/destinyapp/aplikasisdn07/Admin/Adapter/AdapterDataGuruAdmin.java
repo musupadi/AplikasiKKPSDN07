@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.destinyapp.aplikasisdn07.Admin.MainAdminActivity;
 import com.destinyapp.aplikasisdn07.Models.DataModel;
 import com.destinyapp.aplikasisdn07.R;
 
@@ -42,6 +43,7 @@ public class AdapterDataGuruAdmin extends RecyclerView.Adapter<AdapterDataGuruAd
         holderData.ttl.setText(dm.getTempatlahir()+","+dm.getTanggalahir());
         holderData.agama.setText(dm.getAgama());
         holderData.notelp.setText(dm.getNotelp());
+        holderData.pendidikan.setText(dm.getPendidikan());
         holderData.jabatan.setText(dm.getJabatan());
         holderData.jk.setText(dm.getJk());
         holderData.alamat.setText(dm.getAlamat());
@@ -74,6 +76,17 @@ public class AdapterDataGuruAdmin extends RecyclerView.Adapter<AdapterDataGuruAd
             jk = (TextView)v.findViewById(R.id.tvJKGuruAdmin);
             PhotoAdmin = (ImageView)v.findViewById(R.id.ivPhotoGuruAdmin);
             alamat = (TextView)v.findViewById(R.id.tvAlamatGuruAdmin);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String NIP = dm.getNip();
+                    Intent goInput = new Intent(ctx, MainAdminActivity.class);
+                    goInput.putExtra("INPUT_GURU","input_guru");
+                    goInput.putExtra("KEY_UI","Update");
+                    goInput.putExtra("KEY_NIP",NIP);
+                    ctx.startActivities(new Intent[]{goInput});
+                }
+            });
         }
     }
     private void getImageFromURL(String URL){

@@ -26,11 +26,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.destinyapp.aplikasisdn07.API.ApiRequest;
 import com.destinyapp.aplikasisdn07.API.RetroServer;
+import com.destinyapp.aplikasisdn07.Fragment.AboutFragment;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.AbsenSiswaGuru;
+import com.destinyapp.aplikasisdn07.Guru.Fragment.Absensi;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.AbsensiSiswaGuru;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.AllClassFragmentGuru;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.AllSiswaInKelasGuru;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.GuruMengajarFragment;
+import com.destinyapp.aplikasisdn07.Guru.Fragment.MainPenilaian;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.NilaiFragmentGuru;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.PemberianNilaiFragment;
 import com.destinyapp.aplikasisdn07.Guru.Fragment.RaportFinalSiswaGuru;
@@ -99,6 +102,8 @@ public class MainGuruActivity extends AppCompatActivity
         String idKelas = data.getStringExtra("id_kelas");
         String idMapel = data.getStringExtra("id_mapel");
         String NIS = data.getStringExtra("nis");
+        String inputNilai = data.getStringExtra("INPUT_NILAI");
+        String inputAbsen = data.getStringExtra("INPUT_ABSEN");
         final String absensi = data.getStringExtra("Absensi");
         final String kelas = data.getStringExtra("Kelas");
         final String penilaian = data.getStringExtra("Penilaian");
@@ -126,11 +131,13 @@ public class MainGuruActivity extends AppCompatActivity
             bundle.putString("KEY_NIS",NIS);
             fragment = new RaportFinalSiswaGuru();
             fragment.setArguments(bundle);
+        }else if(inputNilai !=null){
+            fragment = new NilaiFragmentGuru();
+        }else if(inputAbsen !=null){
+            fragment = new Absensi();
         }else{
             fragment = new GuruMengajarFragment();
         }
-
-
         ChangeFragment(fragment);
     }
 
@@ -175,10 +182,8 @@ public class MainGuruActivity extends AppCompatActivity
 
         if (id == R.id.nav_mengajarGuru) {
             fragment = new GuruMengajarFragment();
-        } else if (id == R.id.nav_absenGuru) {
-            fragment = new AbsenSiswaGuru();
-        } else if (id == R.id.nav_penilaianGuru) {
-            fragment = new NilaiFragmentGuru();
+        }else if (id == R.id.nav_penilaianGuru) {
+            fragment = new MainPenilaian();
         }else if (id == R.id.nav_raportGuru) {
             fragment = new RaportSiswaGuru();
         } else if (id == R.id.nav_tugasGuru) {
@@ -187,6 +192,8 @@ public class MainGuruActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_keluarGuru) {
             logout();
+        }else if (id == R.id.nav_about) {
+            fragment=new AboutFragment();
         }
         ChangeFragment(fragment);
 

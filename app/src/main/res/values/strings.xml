@@ -4,7 +4,7 @@
     <string name="title_admin">Admin</string>
     <string name="title_guru">Guru</string>
     <string name="title_siswa">Siswa</string>
-    <string name="base_url">http://192.168.43.70/AplikasiSDN07/</string>
+    <string name="base_url">http://192.168.0.23/AplikasiSDN07/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_guru">Guru Panel</string>
@@ -16,7 +16,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main_siswa">Siswa Panel</string>
     <string name="title_activity_main_admin">Admin Panel</string>
-
+    <string name="alasan">Pada sekolah SDN 07 Makasar Pagi System penginputan raprort Siswa masih menggunakan Input Manual.
+        Oleh karena itu, dibuatnya Aplikasi ini untuk memudahkan penginputan raport siswa</string>
     <string-array name="jk">
         <item>Pria</item>
         <item>Wanita</item>
